@@ -23,8 +23,8 @@ from models import Model
 from datetime import datetime
 import matplotlib.pyplot as plt
 from collections import namedtuple
-from data_generator import DataGenerator
 from utils import setup, write_to_audio
+from data_generator import DataGenerator
 from keras.utils.layer_utils import count_params
 
 def train(args):
