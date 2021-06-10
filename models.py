@@ -61,32 +61,6 @@ class  _GlobalNorm(tf.keras.layers.Layer):
             tf.reduce_mean((inputs - E)**2, axis=[1, 2], name="Var_GN_rm"), [-1, 1, 1], name="Var_GN_reshape")
         return ((inputs - E) / tf.math.sqrt(Var + tf.keras.backend.epsilon())) * self.gamma + self.beta
 
-class Antirectifier(tf.keras.layers.Layer):
-    def __init__(self, initializer="he_normal", **kwargs):
-        super(Antirectifier, self).__init__(**kwargs)
-        self.initializer = tf.keras.initializers.get(initializer)
-
-    def build(self, input_shape):
-        output_dim = input_shape[-1]
-        self.kernel = self.add_weight(
-            shape=(output_dim * 2, output_dim),
-            initializer=self.initializer,
-            name="kernel",
-            trainable=True)
-        
-    def get_config(self):
-        base_config = super(Antirectifier, self).get_config()
-        config = {"initializer": tf.keras.initializers.serialize(self.initializer)}
-        return dict(list(base_config.items()) + list(config.items()))
-    
-    def call(self, inputs):
-        inputs -= tf.reduce_mean(inputs, axis=-1, keepdims=True)
-        pos = tf.keras.activations.relu(inputs)
-        neg = tf.keras.activations.relu(-inputs)
-        concatenated = tf.concat([pos, neg], axis=-1)
-        mixed = tf.matmul(concatenated, self.kernel)
-        return mixed
-
 class Encoder(tf.keras.layers.Layer):
     def __init__(self, N, L, **kwargs):
         super(Encoder, self).__init__(**kwargs)
