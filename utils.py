@@ -49,65 +49,6 @@ def setup():
 
     return args
 
-def plot_spectrograms(model, ds, path, args, n_predictions): 
-    if n_predictions > 10:
-        n_predictions = 5
-        
-    elements = ds.take(n_predictions)
-    
-    noisy_l = np.zeros((n_predictions, args.duration*args.sample_rate))
-    clean_l = np.zeros((n_predictions, args.duration*args.sample_rate))
-    noisy_r = np.zeros((n_predictions, args.duration*args.sample_rate))
-    clean_r = np.zeros((n_predictions, args.duration*args.sample_rate))
-
-    i = 0
-    for x, _ in elements:
-        noisy_l[i,:] = x[0][0]
-        clean_l[i,:] = model(x)[0][0]
-        noisy_r[i,:] = x[1][0]
-        clean_r[i,:] = model(x)[1][0]
-        i +=1
-        
-    rows = n_predictions
-    cols = 4
-    
-    plt.style.use('seaborn-poster')
-    
-    f, arr = plt.subplots(rows, cols, figsize=(10*cols, 4 * rows))
-    arr[0,0].set_title('Noisy Left')
-    arr[0,1].set_title('Enhanced Left')
-    arr[0,2].set_title('Noisy Right')
-    arr[0,3].set_title('Enhanced Right')
-    arr[n_predictions-1,0].set_xlabel('Time (s)')
-    arr[n_predictions-1,1].set_xlabel('Time (s)')
-    arr[n_predictions-1,2].set_xlabel('Time (s)')
-    arr[n_predictions-1,3].set_xlabel('Time (s)')
-    
-    for r in range(rows):
-        for c in range(cols):
-            if c == 0:
-                p = arr[r, c]
-                p.set_ylabel("Frequency (Hz)")
-                p.specgram(noisy_l[r,:], NFFT = 128, Fs = args.sample_rate, 
-                           noverlap=64, cmap = "Blues")
-                p.grid(False)
-            elif c == 1:
-                p = arr[r, c]
-                p.specgram(clean_l[r,:], NFFT = 128, Fs = args.sample_rate, 
-                           noverlap=64, cmap = 'Blues')
-                p.grid(False)
-            elif c == 2:
-                p = arr[r, c]
-                p.specgram(noisy_r[r,:], NFFT = 128, Fs = args.sample_rate, 
-                           noverlap=64, cmap = 'Reds')
-                p.grid(False)
-            else:
-                p = arr[r, c]
-                p.specgram(clean_r[r,:], NFFT = 128, Fs = args.sample_rate, 
-                           noverlap=64, cmap = 'Reds')
-                p.grid(False)
-    plt.savefig(path)
-
 def write_to_audio(model, ds, args, path):   
     c = 0
     for inp in ds:
