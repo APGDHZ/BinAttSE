@@ -27,7 +27,6 @@ def setup():
     parser.add_argument('-lr', '--learning_rate', type=float, default=1e-3)
     parser.add_argument('-ld', '--model_dir', type=str, default='./models')    
     parser.add_argument('-dd', '--data_dir', type=str, default='./data')
-    parser.add_argument('-md', '--metadata_dir', type=str, default='./data/test/metadata')
     parser.add_argument('-sr', '--sample_rate', type=int, default=8000)
     parser.add_argument('-c',  '--causal', type=bool, default = True)
     parser.add_argument('-me', '--max_epoch', type=int, default=100)
