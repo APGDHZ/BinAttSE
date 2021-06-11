@@ -50,11 +50,11 @@ def train(args):
     checkpoint_path = os.path.join(model_dir, 'model_best[{}].h5'.format(time_stamp))
     
     callbacks = [
-        tf.keras.callbacks.EarlyStopping(monitor="loss", patience = 5),
-        tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor = .8, patience=3, min_lr = 0.),
+        tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience = 5),
+        tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor = .8, patience=3, min_lr = 0.),
         tf.keras.callbacks.CSVLogger(log_path),
         tf.keras.callbacks.ModelCheckpoint(checkpoint_path, 
-                                           monitor='loss', verbose=0, save_best_only=True, 
+                                           monitor='val_loss', verbose=0, save_best_only=True, 
                                            mode='auto', save_freq='epoch')]
     
     physical_devices = tf.config.list_physical_devices()
