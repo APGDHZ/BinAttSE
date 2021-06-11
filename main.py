@@ -140,9 +140,7 @@ def evaluate(args, model):
     snr_right = -snr_right
     test_snr = np.mean([snr_left , snr_right])                   
    
-
     print("Mean SI-SNR: {:.2f} dB".format(test_snr))
-
       
     with open(os.path.join(model_dir, "Evaluation results[" + model_time_stamp + "].txt"), "w") as f:
         f.write("Topology: {:s}\n".format(args.topology))
@@ -153,7 +151,6 @@ def evaluate(args, model):
         f.write("Bottleneck: {:d}".format(args.S))
         
     f.close()
-
 
     workbook = xlsxwriter.Workbook(os.path.join(model_dir, "Evaluation results[" + model_time_stamp + "].xlsx"))
     worksheet = workbook.add_worksheet()
