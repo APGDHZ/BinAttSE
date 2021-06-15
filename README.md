@@ -1,5 +1,5 @@
 # Binaural Attention Speech Enhancement
-Binaural speech enhancement method based on a Tensorflow [1] implementation of the TasNet [2].
+Binaural speech enhancement method based on a TensorFlow [1] implementation of the TasNet [2].
 
 # Requirements
 See [Requirements.txt](https://github.com/APGDHZ/BinAttSE/blob/main/requirements.txt)
