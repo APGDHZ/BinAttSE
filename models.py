@@ -220,15 +220,13 @@ class Masker(tf.keras.layers.Layer):
     def build(self, inputs):   
         self.prelu = tf.keras.layers.PReLU(shared_axes=[1], name = "decode_PReLU")
         self.decode = tf.keras.layers.Conv1D(self.N, 1, 1, name = "1x1_conv_decoder")
-        self.activation = Antirectifier()
 
     def get_config(self):
         config = super(Masker, self).get_config().copy()
         config.update({
             'n': self.N,
             'prelu': self.prelu,
-            'decode': self.decode,
-            'activation':self.activation})
+            'decode': self.decode})
         return config 
     
     def call(self, inputs, encoded_input, **kwargs):       
