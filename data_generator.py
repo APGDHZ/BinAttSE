@@ -69,8 +69,8 @@ class DataGenerator():
         writer = tf.io.TFRecordWriter(self.tfr)
         
         if self.mode != "test":
-            mix_filenames = glob.glob(os.path.join(self.wav_dir, "*mixed_CH1.wav"))
-            target_filenames = glob.glob(os.path.join(self.wav_dir, "*target_CH1.wav"))
+            mix_filenames = glob.glob(os.path.join(self.wav_dir, "*mixure.wav"))
+            target_filenames = glob.glob(os.path.join(self.wav_dir, "*target.wav"))
             sys.stdout.flush()  
             
             for mix_filename, target_filename in tqdm(zip(mix_filenames, 
@@ -99,7 +99,7 @@ class DataGenerator():
                 for i in range(0, now_length - target_length, stride):
                     write(i, i + target_length)
         else:
-            mix_filenames = glob.glob(os.path.join(self.wav_dir, "*mixed_CH1.wav"))
+            mix_filenames = glob.glob(os.path.join(self.wav_dir, "*mixure.wav"))
             sys.stdout.flush()  
             
             for mix_filename in tqdm(mix_filenames, total = len(mix_filenames)):
