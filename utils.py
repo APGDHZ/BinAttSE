@@ -20,7 +20,7 @@ def setup():
     
     parser.add_argument('-top', '--topology', type=str, default = "Double_attention")
     
-    parser.add_argument('-mo', '--mode', type=str, default='test')  
+    parser.add_argument('-mo', '--mode', type=str, default='train')  
     
     parser.add_argument('-gpu',  '--GPU', type=bool, default = True)
     
