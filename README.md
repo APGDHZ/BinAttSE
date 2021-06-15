@@ -1,4 +1,4 @@
-# Binaural Attention Speech Enhancement
+# Binaural Speech Enhancement Based on Deep Attention Layers
 
 Deep learning based speech enhancement methods have been proven to be successful at removing unwanted interfering signals from target ones. Generally, these algorithms focus on removing the noisy elements from single-channel signals. However, humans listen with two ears, allowing the central auditory pathways to merge the auditory messages sent by the two cochleae into auditory objects. This is known as binaural hearing and constitutes a crucial aspect of auditory perception by means of separating target signals from noise and competing sources. 
 
