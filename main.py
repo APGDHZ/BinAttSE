@@ -155,18 +155,18 @@ def evaluate(args, model):
     workbook = xlsxwriter.Workbook(os.path.join(model_dir, "Evaluation results[" + model_time_stamp + "].xlsx"))
     worksheet = workbook.add_worksheet()
     data= (
-        ['Topology',  args.topology],
-        ['MeanSNR',   test_snr],
-        ['LeftSNR',   snr_left],
-        ['RightSNR',  snr_right],
-        ['Params',    count_params(model.trainable_variables)],
-        ['SkipSize',  args.S])
+        ['Topology', args.topology],
+        ['MeanSNR',  test_snr],
+        ['LeftSNR',  snr_left],
+        ['RightSNR', snr_right],
+        ['Params',   count_params(model.trainable_variables)],
+        ['SkipSize', args.S])
     
     row = 0
     col = 0
     
     for var, value in (data):
-        worksheet.write(row, col,     var)
+        worksheet.write(row, col, var)
         worksheet.write(row, col + 1, value)
         row += 1
     
