@@ -113,11 +113,11 @@ class TCN(tf.keras.layers.Layer):
         
         if self.causal:
             self.encoded_len = (int(self.duration * self.sample_rate) - self.L) // (self.L // 2) + 1
-            inp_norm = _ChannelNorm(self.encoded_len, self.N, name = "Input_Channel_Norm")
+            inp_norm  = _ChannelNorm(self.encoded_len, self.N, name = "Input_Channel_Norm")
             frst_norm = _ChannelNorm(self.encoded_len, self.H, name = "First_Channel_Norm")
             scnd_norm = _ChannelNorm(self.encoded_len, self.H, name = "Second_Channel_Norm")
         else:
-            inp_norm = _GlobalNorm(self.N, name = "Input_Global_Norm")
+            inp_norm  = _GlobalNorm(self.N, name = "Input_Global_Norm")
             frst_norm = _GlobalNorm(self.H, name = "First_Global_Norm")
             scnd_norm = _GlobalNorm(self.H, name = "Second_Global_Norm")
         
