@@ -1,7 +1,7 @@
 # Binaural Speech Enhancement Based on Deep Attention Layers
 
 <p align="center">
-<img src="https://github.com/APGDHZ/BinAttSE/blob/main/images/block-1.png" width="500" height="600">
+<img src="https://github.com/APGDHZ/BinAttSE/blob/main/images/block-1.png" width="500" height="200">
 </p>
 
 <p align="justify">
