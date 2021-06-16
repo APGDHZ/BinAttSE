@@ -290,18 +290,10 @@ class Model():
              
         self.attention = tf.keras.layers.Multiply(name = "Attention_layer")
        
-        self.lstm_decoder_left = tf.compat.v1.keras.layers.CuDNNLSTM(self.S, return_sequences=True, 
-                                                                     name = "Decoder_LSTM_left")
-        
-        self.lstm_decoder_right = tf.compat.v1.keras.layers.CuDNNLSTM(self.S, return_sequences=True, 
-                                                                      name = "Decoder_LSTM_right")
-        
         self.masker_left = Masker(self.N, name = "Masker_left")
         
         self.masker_right = Masker(self.N, name = "Masker_right")
           
-        self.masker_right = Masker(self.N, name = "Masker_right")
-        
         self.decoder_left = Decoder(self.L, name = "Decoder_left")
         
         self.decoder_right = Decoder(self.L, name = "Decoder_right")
