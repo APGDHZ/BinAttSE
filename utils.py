@@ -38,7 +38,7 @@ def setup():
     parser.add_argument('-L', '-L', type=int, default=16)
     parser.add_argument('-B', '-B', type=int, default=64)
     parser.add_argument('-H', '-H', type=int, default=64)
-    parser.add_argument('-S', '-S', type=int, default=128)
+    parser.add_argument('-S', '-S', type=int, default=512)
     parser.add_argument('-P', '-P', type=int, default=128)
     parser.add_argument('-X', '-X', type=int, default=2)
     parser.add_argument('-R', '-R', type=int, default=2)
