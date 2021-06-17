@@ -148,7 +148,7 @@ def evaluate(args, model):
         f.write("Left SI-SNR: {:.2f} dB\n".format(snr_left))
         f.write("Right SI-SNR: {:.2f} dB\n".format(snr_right))
         f.write("Number of parameters: {:d}\n".format(count_params(model.trainable_variables)))
-        f.write("Bottleneck: {:d}".format(args.S))
+        f.write("S: {:d}".format(args.S))
         
     f.close()
 
@@ -160,7 +160,7 @@ def evaluate(args, model):
         ['LeftSNR',  snr_left],
         ['RightSNR', snr_right],
         ['Params',   count_params(model.trainable_variables)],
-        ['SkipSize', args.S])
+        ['S', args.S])
     
     row = 0
     col = 0
