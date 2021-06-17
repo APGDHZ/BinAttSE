@@ -71,7 +71,7 @@ class Encoder(tf.keras.layers.Layer):
         self.encoder = tf.keras.layers.Conv1D(
                 filters=self.N,
                 kernel_size=self.L,
-                strides=self.L // 2,
+                strides=self.L//2,
                 activation="linear",
                 name="encode_conv1d")
         
