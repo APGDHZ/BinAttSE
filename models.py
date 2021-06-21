@@ -145,7 +145,10 @@ class TCN(tf.keras.layers.Layer):
                     shared_axes=[1], name = "second_PReLU")
                 
                 layers[this_block + "second_norm"] = scnd_norm
-                                
+                
+                layers[this_block + "res_1x1_conv"] = tf.keras.layers.Conv1D(
+                    filters=self.B, kernel_size=1, name = "res_1x1_conv") 
+                
                 layers[this_block + "skip_1x1_conv"] = tf.keras.layers.Conv1D(
                     filters=self.S, kernel_size=1, name = "skip_1x1_conv")
        
@@ -200,6 +203,8 @@ class TCN(tf.keras.layers.Layer):
                 block_output = self.lrs[now_block + "second_PReLU"](block_output)
 
                 block_output = self.lrs[now_block + "second_norm"](block_output)
+                
+                block_output = self.lrs[now_block + "res_1x1_conv"](block_output)
                                 
                 skip = self.lrs[now_block + "skip_1x1_conv"](block_output)
                 
