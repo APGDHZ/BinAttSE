@@ -293,7 +293,9 @@ class Model():
                                                            self.causal, self.skip,  self.duration, 
                                                            self.sample_rate, self.GPU, name = "TCN_right")
              
-        self.attention = tf.keras.layers.Multiply(name = "Attention_layer")
+        self.attention1 = tf.keras.layers.Multiply(name = "Attention_layer 1")
+        
+        self.attention2 = tf.keras.layers.Multiply(name = "Attention_layer 2")
        
         self.masker_left = Masker(self.N, name = "Masker_left")
         
@@ -313,13 +315,13 @@ class Model():
                   
             enc_inp_r = self.encoder_right(input_right)
             
-            kernel1 =  self.attention([enc_inp_l, enc_inp_r])
+            kernel1 =  self.attention2([enc_inp_l, enc_inp_r])
             
             skp_l = self.TCN_left(kernel1)
             
             skp_r = self.TCN_right(kernel1) 
             
-            kernel2 =  self.attention([skp_l, skp_r])
+            kernel2 =  self.attention1([skp_l, skp_r])
 
             masked_left = self.masker_left(kernel2, enc_inp_l)
 
