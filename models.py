@@ -293,9 +293,9 @@ class Model():
                                                            self.causal, self.skip,  self.duration, 
                                                            self.sample_rate, self.GPU, name = "TCN_right")
              
-        self.attention1 = tf.keras.layers.Multiply(name = "Attention_layer 1")
+        self.attention1 = tf.keras.layers.Multiply(name = "Attention_layer_1")
         
-        self.attention2 = tf.keras.layers.Multiply(name = "Attention_layer 2")
+        self.attention2 = tf.keras.layers.Multiply(name = "Attention_layer_2")
        
         self.masker_left = Masker(self.N, name = "Masker_left")
         
