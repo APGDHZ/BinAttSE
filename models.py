@@ -83,7 +83,7 @@ class Encoder(tf.keras.layers.Layer):
             'l': self.L})
         return config 
     
-    def call(self, inputs, **kwargs):
+    def call(self, inputs):
         encoded_input = self.encoder(inputs=tf.expand_dims(inputs, -1))
         return encoded_input
 
@@ -110,7 +110,6 @@ class TCN(tf.keras.layers.Layer):
             self.padding = "same"
         
     def build(self, inputs):
-        
         if self.causal:
             self.encoded_len = (int(self.duration * self.sample_rate) - self.L) // (self.L // 2) + 1
             inp_norm  = _ChannelNorm(self.encoded_len, self.N, name = "Input_Channel_Norm")
@@ -174,14 +173,10 @@ class TCN(tf.keras.layers.Layer):
             'enc_len': self.encoded_len})
         return config 
 
-    def call(self, encoded_input, **kwargs):
-        
+    def call(self, encoded_input):
         self.encoded_len = encoded_input.shape[1]
-        
         norm_input = self.lrs["input_norm"](encoded_input)
-
         block_input = self.lrs["bottleneck"](norm_input)
-        
         skip_connections = 0
         
         for r in range(self.R):
@@ -234,7 +229,7 @@ class Masker(tf.keras.layers.Layer):
             'decode': self.decode})
         return config 
     
-    def call(self, inputs, encoded_input, **kwargs):       
+    def call(self, inputs, encoded_input):       
         inputs = self.prelu(inputs)
         sep_output = self.decode(inputs) 
         mask = tf.keras.activations.softmax(sep_output)
@@ -256,7 +251,7 @@ class Decoder(tf.keras.layers.Layer):
             'deconv': self.deconv})
         return config 
    
-    def call(self, inputs,  **kwargs):  
+    def call(self, inputs):  
         output = tf.squeeze(self.deconv(inputs), -1)       
         return output
          
