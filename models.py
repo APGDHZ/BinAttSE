@@ -356,7 +356,7 @@ class SISNR(tf.keras.losses.Loss):
                                       keepdims=True) * s / norm(s)
             num = norm(s_target)
             den = norm(s_hat - s_target)
-            return 10. * tf.experimental.numpy.log10(num/ den)
+            return 10. * tf.experimental.numpy.log10(num / den)
         
         sdr = calc_snr(y_pred, y_true)
         return tf.reduce_mean(-sdr)
