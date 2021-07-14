@@ -123,9 +123,9 @@ class DataGenerator():
             example = tf.io.parse_single_example(
                 serialized_example,
                 features={
-                    "noisy_left": tf.io.VarLenFeature(tf.float32),
+                    "noisy_left":  tf.io.VarLenFeature(tf.float32),
                     "noisy_right": tf.io.VarLenFeature(tf.float32),
-                    "clean_left": tf.io.VarLenFeature(tf.float32),
+                    "clean_left":  tf.io.VarLenFeature(tf.float32),
                     "clean_right": tf.io.VarLenFeature(tf.float32)})
             
             noisy_left =  tf.sparse.to_dense(example["noisy_left"])
