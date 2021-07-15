@@ -60,6 +60,7 @@ def write_to_audio(model, ds, args, path):
     for inp in tqdm(ds, total = c, position = 0, leave = True): 
 
         prediction_left, prediction_right = pad_and_separate(inp, args, model)
+        
         l = len(prediction_left[-1])
         
         prediction_left = resample(prediction_left[-1], int(l * (44100 / args.sample_rate) + 1))
