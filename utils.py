@@ -78,7 +78,7 @@ def write_to_audio(model, ds, args, path):
         if j == c-1:
             print("\nDone!")
             
-def pad_and_separate(inp, args, model, return_padded = False):
+def pad_and_separate(inp, args, model):
 
     original_length = inp[0].shape[-1]
     slices = (original_length -tf.math.floormod(original_length, 
