@@ -265,7 +265,6 @@ class Model():
         self.P = args.P
         self.X = args.X
         self.R = args.R
-        self.G = args.G
         self.GPU = args.GPU
         self.skip = args.skip
         self.top = args.topology
