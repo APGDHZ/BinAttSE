@@ -199,12 +199,12 @@ class TCN(tf.keras.layers.Layer):
 
                 block_output = self.lrs[now_block + "second_norm"](block_output)
                 
-                block_output = self.lrs[now_block + "out_1x1_conv"](block_output)
-                                
+                residual = self.lrs[now_block + "res_1x1_conv"](block_output)
+                
                 skip = self.lrs[now_block + "skip_1x1_conv"](block_output)
                 
-                block_input = block_output + block_input
-                
+                block_input = residual + block_input
+
                 skip_connections = skip_connections + skip
         
         if self.skip:
