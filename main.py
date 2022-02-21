@@ -29,7 +29,7 @@ from keras.utils.layer_utils import count_params
 
 def train(args):
         
-    loss = models.SISNR()
+    loss = models.SISDR()
 
     time_stamp = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
     
@@ -93,14 +93,14 @@ def train(args):
     plt.title('Training and validation performance')
     plt.xlabel('Epoch')
     plt.grid(axis='x')
-    plt.ylabel('SI-SNR [dB]')
+    plt.ylabel('SI-SDR [dB]')
     plt.legend(loc='lower right')
     
     plt.savefig(os.path.join(model_dir,'learning_curves.pdf'))
 
 def evaluate(args, model):         
     
-    loss = models.SISNR()
+    loss = models.SISDR()
     
     model_time_stamp = model[-20:-1]
    
@@ -140,13 +140,13 @@ def evaluate(args, model):
     snr_right = -snr_right
     test_snr = np.mean([snr_left , snr_right])                   
    
-    print("Mean SI-SNR: {:.2f} dB".format(test_snr))
+    print("Mean SI-SDR: {:.2f} dB".format(test_snr))
       
     with open(os.path.join(model_dir, "Evaluation results[" + model_time_stamp + "].txt"), "w") as f:
         f.write("Topology: {:s}\n".format(args.topology))
-        f.write("Mean SI-SNR: {:.2f} dB\n".format(test_snr))
-        f.write("Left SI-SNR: {:.2f} dB\n".format(snr_left))
-        f.write("Right SI-SNR: {:.2f} dB\n".format(snr_right))
+        f.write("Mean SI-SDR: {:.2f} dB\n".format(test_snr))
+        f.write("Left SI-SDR: {:.2f} dB\n".format(snr_left))
+        f.write("Right SI-SDR: {:.2f} dB\n".format(snr_right))
         f.write("Number of parameters: {:d}\n".format(count_params(model.trainable_variables)))
         f.write("S: {:d}".format(args.S))
         
@@ -156,9 +156,9 @@ def evaluate(args, model):
     worksheet = workbook.add_worksheet()
     data= (
         ['Topology', args.topology],
-        ['MeanSNR',  test_snr],
-        ['LeftSNR',  snr_left],
-        ['RightSNR', snr_right],
+        ['MeanSDR',  test_snr],
+        ['LeftSDR',  snr_left],
+        ['RightSDR', snr_right],
         ['Params',   count_params(model.trainable_variables)],
         ['S', args.S])
     
@@ -174,7 +174,7 @@ def evaluate(args, model):
 
 def test(args, model):         
     
-    loss = models.SISNR()
+    loss = models.SISDR()
     
     model_time_stamp = model[-20:-1]
    
